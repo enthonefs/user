@@ -4,6 +4,8 @@ import com.cadastro.user.infrastructure.entitys.Usuario;
 import com.cadastro.user.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -15,13 +17,18 @@ public class UsuarioService {
 
     public void salvarUsuario(Usuario usuario){
         repository.saveAndFlush(usuario);
+
     }
 
-    public Usuario buscarUsuarioPorEmail(String email){
+    public Usuario buscarUsuarioPorId(Integer id){
 
-        return repository.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Email não encontrado!")
+        return repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Id indisponível!")
         );
+    }
+
+    public List<Usuario> listarTodos(){
+        return repository.findAll();
     }
 
     public void deletarUsuarioPorEmail(String email){
