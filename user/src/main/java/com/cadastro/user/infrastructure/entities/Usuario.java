@@ -1,4 +1,4 @@
-package com.cadastro.user.infrastructure.entitys;
+package com.cadastro.user.infrastructure.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.cadastro.user.business;
 
-import com.cadastro.user.infrastructure.entitys.Usuario;
+import com.cadastro.user.infrastructure.entities.Usuario;
 import com.cadastro.user.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
