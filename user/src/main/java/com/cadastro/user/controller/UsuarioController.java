@@ -1,7 +1,7 @@
 package com.cadastro.user.controller;
 
 import com.cadastro.user.business.UsuarioService;
-import com.cadastro.user.infrastructure.entitys.Usuario;
+import com.cadastro.user.infrastructure.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
