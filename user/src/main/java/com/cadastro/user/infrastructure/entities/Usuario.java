@@ -16,9 +16,14 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "nome")
+    private String nome;
+
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "nome")
-    private String nome;
+    @Column(name = "senha")
+    private String senha;
+
+
 }
