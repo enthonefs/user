@@ -1,6 +1,7 @@
 package com.cadastro.user.controller;
 
 import com.cadastro.user.business.UsuarioService;
+import com.cadastro.user.business.dto.UsuarioDTO;
 import com.cadastro.user.infrastructure.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody Usuario usuario){
-        usuarioService.salvarUsuario(usuario);
+    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        usuarioService.salvarUsuario(usuarioDTO);
         return ResponseEntity.ok().build();
     }
 

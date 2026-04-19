@@ -1,22 +1,24 @@
 package com.cadastro.user.business;
 
+import com.cadastro.user.business.converter.UsuarioConverter;
+import com.cadastro.user.business.dto.UsuarioDTO;
 import com.cadastro.user.infrastructure.entities.Usuario;
 import com.cadastro.user.infrastructure.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository repository;
+    private final UsuarioConverter converter;
 
-    public UsuarioService(UsuarioRepository repository) {
-        this.repository = repository;
-    }
-
-    public void salvarUsuario(Usuario usuario){
-        repository.saveAndFlush(usuario);
+    public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuario = converter.paraUsuario(usuarioDTO);
+        return converter.paraUsuarioDTO(repository.save(usuario));
 
     }
 
@@ -43,6 +45,8 @@ public class UsuarioService {
                         usuarioEntity.getEmail())
                 .nome(usuario.getNome() != null ? usuario.getNome() :
                         usuarioEntity.getNome())
+                .senha(usuario.getSenha() != null ? usuario.getSenha() :
+                        usuarioEntity.getSenha())
                 .id(usuarioEntity.getId())
                 .build();
 
