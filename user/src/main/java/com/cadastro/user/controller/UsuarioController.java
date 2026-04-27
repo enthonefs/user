@@ -17,18 +17,23 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO){
-        usuarioService.salvarUsuario(usuarioDTO);
+    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO dto){
+        usuarioService.salvarUsuario(dto);
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.login(dto));
+    }
+
     @GetMapping(params = "id")
-    public ResponseEntity<Usuario> buscarUsuarioPorId(@RequestParam Integer id){
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@RequestParam Integer id){
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorId(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarTodos(){
+    public ResponseEntity<List<UsuarioDTO>> listarTodos(){
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
