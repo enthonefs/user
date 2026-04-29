@@ -17,32 +17,35 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO){
-        usuarioService.salvarUsuario(usuarioDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.login(dto));
     }
 
     @GetMapping(params = "id")
-    public ResponseEntity<Usuario> buscarUsuarioPorId(@RequestParam Integer id){
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@RequestParam Integer id){
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorId(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarTodos(){
+    public ResponseEntity<List<UsuarioDTO>> listarTodos(){
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
-    @DeleteMapping
+    @DeleteMapping(params = "email")
     public ResponseEntity<Void> deletarUsuarioPorEmail(@RequestParam String email){
         usuarioService.deletarUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> atualizarUsuarioPorId(@RequestParam Integer id,
-                                                      @RequestBody Usuario usuario){
-        usuarioService.atualizarUsuarioPorEmail(id, usuario);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestHeader("Authorization") String token,
+                                                        @RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(token, dto));
 
     }
 }
