@@ -17,9 +17,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO dto){
-        usuarioService.salvarUsuario(dto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
     }
 
     @PostMapping("/login")
@@ -37,17 +36,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
-    @DeleteMapping
+    @DeleteMapping(params = "email")
     public ResponseEntity<Void> deletarUsuarioPorEmail(@RequestParam String email){
         usuarioService.deletarUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> atualizarUsuarioPorId(@RequestParam Integer id,
-                                                      @RequestBody Usuario usuario){
-        usuarioService.atualizarUsuarioPorEmail(id, usuario);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestHeader("Authorization") String token,
+                                                        @RequestBody UsuarioDTO dto){
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(token, dto));
 
     }
 }
