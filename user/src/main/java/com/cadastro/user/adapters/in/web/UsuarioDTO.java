@@ -1,4 +1,4 @@
-package com.cadastro.user.business.dto;
+package com.cadastro.user.adapters.in.web;
 
 import lombok.*;
 
