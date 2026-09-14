@@ -1,23 +1,22 @@
-package com.cadastro.user.business.converter;
+package com.cadastro.user.adapters.in.web.mappers;
 
-import com.cadastro.user.business.dto.UsuarioDTO;
-import com.cadastro.user.infrastructure.entities.Usuario;
+import com.cadastro.user.adapters.in.web.UsuarioDTO;
+import com.cadastro.user.domain.Usuario;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class UsuarioConverter {
+public class UsuarioWebMapper {
 
-    public Usuario paraUsuario(UsuarioDTO usuarioDTO){
+    public Usuario toDomain(UsuarioDTO dto) {
         return Usuario.builder()
-                .nome(usuarioDTO.getNome())
-                .email(usuarioDTO.getEmail())
-                .senha(usuarioDTO.getSenha())
+                .id(dto.getId())
+                .nome(dto.getNome())
+                .email(dto.getEmail())
+                .senha(dto.getSenha())
                 .build();
     }
 
-    public UsuarioDTO paraUsuarioDTO(Usuario usuario){
+    public UsuarioDTO toDto(Usuario usuario) {
         return UsuarioDTO.builder()
                 .id(usuario.getId())
                 .nome(usuario.getNome())
@@ -26,13 +25,7 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public List<UsuarioDTO> paraListaUsuarioDTO(List<Usuario> usuarios){
-        return usuarios.stream()
-                .map(this::paraUsuarioDTO)
-                .toList();
-    }
-
-    public Usuario updateUsuario(UsuarioDTO dto, Usuario entity){
+    public Usuario merge(UsuarioDTO dto, Usuario entity) {
         return Usuario.builder()
                 .id(entity.getId())
                 .nome(dto.getNome() != null ? dto.getNome() : entity.getNome())
@@ -40,6 +33,4 @@ public class UsuarioConverter {
                 .senha(dto.getSenha() != null ? dto.getSenha() : entity.getSenha())
                 .build();
     }
-
-
 }

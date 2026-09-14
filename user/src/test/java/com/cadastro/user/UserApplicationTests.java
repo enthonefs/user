@@ -1,4 +1,3 @@
-/*
 package com.cadastro.user;
 
 import org.junit.jupiter.api.Test;
@@ -13,4 +12,3 @@ class UserApplicationTests {
 
 }
 
- */

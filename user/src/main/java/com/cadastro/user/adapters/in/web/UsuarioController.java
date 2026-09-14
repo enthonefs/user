@@ -1,8 +1,6 @@
-package com.cadastro.user.controller;
+package com.cadastro.user.adapters.in.web;
 
-import com.cadastro.user.business.UsuarioService;
-import com.cadastro.user.business.dto.UsuarioDTO;
-import com.cadastro.user.infrastructure.entities.Usuario;
+import com.cadastro.user.application.ports.in.UsuarioUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,38 +12,37 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioUseCase usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO dto){
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UsuarioDTO dto){
+    public ResponseEntity<String> login(@RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.login(dto));
     }
 
     @GetMapping(params = "id")
-    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@RequestParam Integer id){
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@RequestParam Long id) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorId(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> listarTodos(){
+    public ResponseEntity<List<UsuarioDTO>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
-
-    @DeleteMapping(params = "email")
-    public ResponseEntity<Void> deletarUsuarioPorEmail(@RequestParam String email){
-        usuarioService.deletarUsuarioPorEmail(email);
+    // Revisar função de delete, correção de autorização
+    @DeleteMapping(params = "id")
+    public ResponseEntity<Void> deletarUsuarioPorId(@RequestParam Long id){
+        usuarioService.deletarUsuarioPorId(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestHeader("Authorization") String token,
-                                                        @RequestBody UsuarioDTO dto){
+                                                       @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.atualizarUsuario(token, dto));
-
     }
 }
