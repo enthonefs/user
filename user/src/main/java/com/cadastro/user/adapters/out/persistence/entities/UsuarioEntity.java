@@ -1,4 +1,4 @@
-package com.cadastro.user.infrastructure.entities;
+package com.cadastro.user.adapters.out.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Table(name = "usuario")
 @Entity
-public class Usuario {
+public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
